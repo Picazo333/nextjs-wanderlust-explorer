@@ -47,16 +47,16 @@ export function FilterBar({
   const destinationOptions = withCurrent(destinations, destination);
 
   return (
-    <div className="grid gap-3 sm:grid-cols-[1fr_1fr_auto] sm:items-end">
+    <div className="filters">
       <div>
-        <label htmlFor={categoryId} className="mb-1.5 block text-sm font-medium">
+        <label htmlFor={categoryId} className="field-label">
           Category
         </label>
         <select
           id={categoryId}
           value={selected(categoryOptions, category)}
           onChange={(event) => onCategoryChange(event.target.value)}
-          className="w-full rounded-xl border border-line bg-card px-3 py-3 text-base text-ink outline-none ring-terracotta focus:ring-2"
+          className="field"
         >
           <option value="">All categories</option>
           {categoryOptions.map((option) => (
@@ -67,17 +67,14 @@ export function FilterBar({
         </select>
       </div>
       <div>
-        <label
-          htmlFor={destinationId}
-          className="mb-1.5 block text-sm font-medium"
-        >
+        <label htmlFor={destinationId} className="field-label">
           Destination
         </label>
         <select
           id={destinationId}
           value={selected(destinationOptions, destination)}
           onChange={(event) => onDestinationChange(event.target.value)}
-          className="w-full rounded-xl border border-line bg-card px-3 py-3 text-base text-ink outline-none ring-terracotta focus:ring-2"
+          className="field"
         >
           <option value="">All destinations</option>
           {destinationOptions.map((option) => (
@@ -91,7 +88,7 @@ export function FilterBar({
         type="button"
         onClick={onClear}
         disabled={!canClear}
-        className="rounded-xl border border-line px-4 py-3 text-sm font-medium text-ink enabled:hover:bg-sand disabled:cursor-not-allowed disabled:opacity-50"
+        className="button button-secondary button-field"
       >
         Clear filters
       </button>

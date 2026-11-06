@@ -13,39 +13,36 @@ export function FavoritesView() {
     .filter((experience): experience is Experience => experience !== undefined);
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-8 sm:py-12">
-      <p className="text-sm font-semibold uppercase tracking-[0.18em] text-gold">
-        Favorites
-      </p>
-      <h1 className="mt-2 font-serif text-4xl tracking-tight sm:text-5xl">
-        Saved for later.
-      </h1>
-      <p className="mt-3 max-w-2xl text-muted">
+    <div className="shell section">
+      <h1>Favorites saved this visit</h1>
+      <p className="lead">
         {saved.length === 0
           ? "You have not saved any experiences yet."
           : `${saved.length} saved ${saved.length === 1 ? "experience" : "experiences"}.`}
       </p>
+      <p className="caption footer-note">
+        The heart on a catalog card adds or removes that experience. This list
+        lasts until you refresh the page.
+      </p>
       {saved.length === 0 ? (
-        <div className="mt-8 rounded-3xl border border-dashed border-line bg-card px-6 py-16 text-center">
-          <p className="text-muted">
-            Tap the heart on any card in the explorer. The list stays while you
-            move between pages.
+        <div className="status-block" role="status">
+          <h2>No favorites yet</h2>
+          <p className="muted">
+            Open the catalog and save an experience you want to come back to
+            during this visit.
           </p>
-          <Link
-            href="/experiences"
-            className="mt-6 inline-flex rounded-full bg-terracotta px-5 py-3 text-sm font-semibold text-paper"
-          >
-            Explore experiences
-          </Link>
+          <div className="button-row">
+            <Link className="button" href="/experiences">
+              Explore experiences
+            </Link>
+          </div>
         </div>
       ) : (
-        <div className="mt-8">
-          <ExperienceGrid
-            experiences={saved}
-            favoriteIds={favoriteIds}
-            onToggleFavorite={toggleFavorite}
-          />
-        </div>
+        <ExperienceGrid
+          experiences={saved}
+          favoriteIds={favoriteIds}
+          onToggleFavorite={toggleFavorite}
+        />
       )}
     </div>
   );

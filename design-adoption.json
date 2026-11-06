@@ -1,0 +1,52 @@
+{
+  "system": "signal",
+  "version": "4.0.0",
+  "foundation_version": "1.1.0",
+  "mode": "light",
+  "scope": ["nextjs-wanderlust-explorer academic retrofit"],
+  "owner_selection": "SIGNAL",
+  "visual_acceptance": "pending_orchestrator_review",
+  "applied": [
+    "tokens.css and motion.css imported unchanged, motion after base",
+    "Arial, Helvetica, sans-serif for UI and display; no remote fonts",
+    "light canvas, 8px control and card radius, pill only on category tags and the favorites count",
+    "home hero is a 7/5 split with one primary action and a labeled catalog photo",
+    "explorer keeps title, filters, list, and detail",
+    "loading, empty, and error views for real route and catalog states",
+    "skip link, landmarks, 44px controls, 48px fields, focus outline from the tokens",
+    "2D motion on the hero photo and the shared-filter heading, with prefers-reduced-motion and a local reduce control",
+    "footer lockup copied byte for byte; horizontal from 640px, stacked below"
+  ],
+  "exceptions": [
+    {
+      "rule": "SIGNAL conserve entries on refresh",
+      "decision": "Favorites stay in useState and clear on refresh",
+      "reason": "OFFICIAL_README says localStorage is out of scope and persistence is not evaluated. The official brief outranks SIGNAL.",
+      "evidence": "src/components/AppShell.tsx and the favorites page copy"
+    },
+    {
+      "rule": "h2 clamp of 2rem to 3rem",
+      "decision": "Catalog card titles use the h3 size, 1.5rem / 1.25",
+      "reason": "Card titles are repeated entity names in a grid. The page h2 scale would overflow the cards. Page headings still use the h2 token.",
+      "evidence": "src/app/globals.css .catalog-card h2, h3"
+    },
+    {
+      "rule": "Full public-landing SEO: canonical, sitemap, schema, OG image",
+      "decision": "Title, description, language, and basic Open Graph text only",
+      "reason": "No production domain is confirmed. Prices and ratings are generated exercise data, so Offer or review schema would invent facts.",
+      "evidence": "src/app/layout.tsx"
+    },
+    {
+      "rule": "Idle, loading, success, empty, error for every data request",
+      "decision": "No fake loading percentage. Loading copy exists for route Suspense. Empty and not-found are real. There is no network request to fail.",
+      "reason": "The catalog is a local module. A simulated progress bar would be a false state.",
+      "evidence": "src/components/Explorer.tsx and src/app/experiences/loading.tsx"
+    },
+    {
+      "rule": "Three highlighted cards on the home page",
+      "decision": "Removed the highest-rated trio",
+      "reason": "Ratings are generated dataset fields, not live popularity. Three identical cards and a claim that people keep coming back were generic and untrue.",
+      "evidence": "src/app/page.tsx"
+    }
+  ]
+}

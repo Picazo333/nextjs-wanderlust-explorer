@@ -8,7 +8,7 @@ The layout takes cues from three public discovery products:
 
 - [Airbnb Experiences](https://www.airbnb.com/experiences) — image cards, a heart control for saving, and a simple path from a grid to a detail page.
 - [GetYourGuide](https://www.getyourguide.com/) — a search field stacked with category and destination filters, plus price and rating on every card.
-- [Atlas Obscura](https://www.atlasobscura.com/) — an editorial serif headline on a photographic hero, used here for the home page.
+- [Atlas Obscura](https://www.atlasobscura.com/) — a direct path from a short home introduction into a catalog, without a second competing call to action in the hero.
 
 ## Run
 
@@ -30,7 +30,7 @@ npm start
 npm run verify
 ```
 
-`npm run verify` checks the dataset shape and the filter rules (regex search, independent category and destination filters, and the combination of all three).
+`npm run verify` checks the dataset shape, the filter rules (regex search, independent category and destination filters, and the combination of all three), and the SHA-256 hashes of the SIGNAL token files and footer lockup.
 
 ## Pages
 
@@ -47,14 +47,18 @@ Shared links look like `/experiences?search=sailing&category=adventure&destinati
 ## Structure
 
 ```text
-src/app/                  routes
+src/app/                  routes, including not-found and error views
 src/components/           Navbar, SearchBar, FilterBar, ExperienceCard, page views
 src/data/experiences.ts   100 experiences and the Experience values
 src/hooks/useExperiences.ts  filtering hook
 src/hooks/useFilters.ts   URL query read/write
 src/lib/filterExperiences.ts  pure title/category/destination filter
+src/lib/motion-runtime.ts    reduced-motion preference and animation cleanup
+src/styles/signal/        SIGNAL tokens and motion values, copied unchanged
 src/types/experience.ts   Experience interface
 public/images/            local placeholder photos
+public/brand/lockups/     footer lockup, copied byte for byte
+brand/originals/          source marks kept for provenance, not shown in the UI
 ```
 
 ## Technical decisions
@@ -67,3 +71,6 @@ public/images/            local placeholder photos
 - `useEffect` updates `document.title` on the explorer when the query changes, and on the detail page when the experience changes. Dependency arrays list only those values.
 - The detail page also lists up to three other experiences in the same country. Those cards receive the same favorite props as the explorer.
 - Card photos are local placeholders in `public/images`. They are not photographs of the named destinations.
+- The interface uses the SIGNAL academic tokens: Arial and Helvetica, the light palette in `src/styles/signal/tokens.css`, and an 8px radius on controls and cards. No remote fonts are loaded.
+- The footer shows the 4Geeks × Divinivid lockup as an academic visual credit. It is not an official partnership, and the files are the originals named in `brand/README.md`.
+- Favorites stay in `useState` for the visit. The assignment leaves `localStorage` out of scope, so a refresh clears the list on purpose.
