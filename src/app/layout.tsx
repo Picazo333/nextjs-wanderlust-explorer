@@ -1,17 +1,7 @@
 import type { Metadata } from "next";
-import { Fraunces, Outfit } from "next/font/google";
+import type { ReactNode } from "react";
 import { AppShell } from "@/components/AppShell";
 import "./globals.css";
-
-const outfit = Outfit({
-  subsets: ["latin"],
-  variable: "--font-outfit",
-});
-
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  variable: "--font-fraunces",
-});
 
 export const metadata: Metadata = {
   title: {
@@ -19,13 +9,23 @@ export const metadata: Metadata = {
     template: "%s · Wanderlust Explorer",
   },
   description:
-    "Browse, search, and save curated travel experiences. Filters live in the URL so a view can be shared.",
+    "Browse 100 local travel experiences. Search by title and filter by category and destination. The address keeps the active filters.",
+  openGraph: {
+    title: "Wanderlust Explorer",
+    description:
+      "Browse 100 local travel experiences. Search by title and filter by category and destination.",
+    locale: "en_US",
+    type: "website",
+  },
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+const motionBoot = `(function(){try{var reduce=false;try{reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;}catch(e){}if(!reduce){try{reduce=localStorage.getItem("signal-motion")==="reduce";}catch(e){}}document.documentElement.setAttribute("data-motion",reduce?"reduced":"full");}catch(e){}})();`;
+
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={`${outfit.variable} ${fraunces.variable} h-full`}>
-      <body className="min-h-full bg-paper font-sans text-ink antialiased">
+    <html lang="en" className="h-full">
+      <body className="min-h-full">
+        <script dangerouslySetInnerHTML={{ __html: motionBoot }} />
         <AppShell>{children}</AppShell>
       </body>
     </html>

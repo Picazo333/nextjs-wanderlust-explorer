@@ -21,8 +21,8 @@ export function SearchBar({ value, onChange }: SearchBarProps) {
   }
 
   return (
-    <div className="flex-1">
-      <label htmlFor={inputId} className="mb-1.5 block text-sm font-medium">
+    <div>
+      <label htmlFor={inputId} className="field-label">
         Search by title
       </label>
       <input
@@ -36,9 +36,9 @@ export function SearchBar({ value, onChange }: SearchBarProps) {
           setDraft(next);
           onChange(next);
         }}
-        placeholder="Try sailing, market, ridge..."
+        placeholder="Title, for example sailing"
         autoComplete="off"
-        className="w-full rounded-xl border border-line bg-card px-4 py-3 text-base text-ink outline-none ring-terracotta placeholder:text-muted focus:ring-2"
+        className="field"
       />
     </div>
   );

@@ -44,21 +44,16 @@ export function Explorer() {
   );
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-8 sm:py-12">
-      <div className="max-w-2xl">
-        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-gold">
-          Explorer
-        </p>
-        <h1 className="mt-2 font-serif text-4xl tracking-tight sm:text-5xl">
-          Find an experience worth keeping.
-        </h1>
-        <p className="mt-3 text-base leading-7 text-muted">
-          Search titles and stack a category with a destination. The link in
-          the address bar is the filter.
+    <div className="shell section">
+      <div className="stack">
+        <h1>Search the experience catalog</h1>
+        <p className="lead">
+          Match a title, then narrow by category and destination. The fields
+          fill from the address, and the address updates as you change them.
         </p>
       </div>
 
-      <div className="mt-8 space-y-4 rounded-3xl border border-line bg-sand/60 p-4 sm:p-5">
+      <div className="panel">
         <SearchBar value={search} onChange={setSearch} />
         <FilterBar
           category={category}
@@ -72,36 +67,29 @@ export function Explorer() {
         />
       </div>
 
-      <p className="mt-6 text-sm text-muted" aria-live="polite">
+      <p className="ui muted result-count" aria-live="polite">
         Showing {results.length} of {total}
       </p>
 
       {results.length === 0 ? (
-        <div
-          role="status"
-          className="mt-6 rounded-3xl border border-dashed border-line bg-card px-6 py-16 text-center"
-        >
-          <h2 className="font-serif text-3xl">No results found</h2>
-          <p className="mx-auto mt-3 max-w-md text-muted">
+        <div className="status-block" role="status">
+          <h2>No results found</h2>
+          <p className="muted">
             Nothing in the catalog matches this combination. Clear the search
             or choose another category and destination.
           </p>
-          <button
-            type="button"
-            onClick={clearFilters}
-            className="mt-6 rounded-full bg-ink px-5 py-3 text-sm font-semibold text-paper"
-          >
-            Clear filters
-          </button>
+          <div className="button-row">
+            <button type="button" className="button" onClick={clearFilters}>
+              Clear filters
+            </button>
+          </div>
         </div>
       ) : (
-        <div className="mt-6">
-          <ExperienceGrid
-            experiences={results}
-            favoriteIds={favoriteIds}
-            onToggleFavorite={toggleFavorite}
-          />
-        </div>
+        <ExperienceGrid
+          experiences={results}
+          favoriteIds={favoriteIds}
+          onToggleFavorite={toggleFavorite}
+        />
       )}
     </div>
   );
@@ -109,8 +97,9 @@ export function Explorer() {
 
 export function ExplorerFallback() {
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12">
-      <p className="text-muted">Loading experiences…</p>
+    <div className="shell section loading-block" role="status" aria-live="polite">
+      <h1>Search the experience catalog</h1>
+      <p className="lead">Loading the catalog…</p>
     </div>
   );
 }

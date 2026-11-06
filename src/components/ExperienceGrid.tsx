@@ -15,7 +15,7 @@ export function ExperienceGrid({
   titleAs = "h2",
 }: ExperienceGridProps) {
   return (
-    <ul className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    <ul className="catalog-grid">
       {experiences.map((experience) => (
         <li key={experience.id}>
           <ExperienceCard
